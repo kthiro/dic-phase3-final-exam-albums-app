@@ -21,7 +21,7 @@ class AlbumsController < ApplicationController
     @album = current_user.albums.new(album_params)
     image_retrieve_from_cache
     @album.save
-    AlbumMailer.album_mail(@album).deliver
+    # AlbumMailer.album_mail(@album).deliver
     redirect_to albums_path, notice: '新しい写真を投稿しました！'
   end
 
