@@ -14,7 +14,7 @@
           <br><br>
           <div class = "image">
             <% if @album.image.url %>
-              <%= image_tag(@album.image.url) %>
+              <%= image_tag(@album.image.url, class: "card-img-top") %>
               <%= f.hidden_field :image_cache %>
             <% else %>
               投稿する画像がありません。

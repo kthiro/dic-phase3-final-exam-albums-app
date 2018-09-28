@@ -22,28 +22,36 @@
         </div>
       <% end %>
       <br>
+      
       <div class="text-center">
         <% if @album.image.url %>
-          <%= image_tag(@album.image.url) %>
-          <%= f.hidden_field :image_cache %>
+          <div class = "card">
+            <h4 class = "card-header text-center">現在選択中の写真</h4>
+            <div class = "card-body">
+              <div class = "image">
+                <%= image_tag(@album.image.url, class: "card-img-top") %>
+                <%= f.hidden_field :image_cache %>
+              </div>
+            </div>
+          </div>
+          <p>別の写真を投稿する場合はファイルを選択してください</p>
+        <% else %>
+          <p>どの写真を投稿しますか？</p>
         <% end %>
-        
-        <p>どの写真を投稿しますか？</p>
         <%= f.file_field :image %>
-        <br>
-        <br>
-        <br>
+        <br><br><br>
+        
         <%= f.label 'タイトル', for: "inputTitle", class: "sr-only"  %>
         <%= f.text_field :title, id: "inputTitle", class: "form-control", placeholder: "この写真にタイトルをつけて下さい。" %>
         <br>
+        
         <%= f.label '説明', for: "inputContent", class: "sr-only"  %>
         <%= f.text_area :content, id: "inputContent", class: "form-control", placeholder: "どんな写真か教えてください。" %>
         <br>
-
-
+        
         <%= f.hidden_field :photographer, value: current_user[:user_name] %>
         <%= f.submit '投稿する', class: "btn btn-primary" %>
-
+      </div>
     <% end %>
   </div>
 </div>

@@ -41,11 +41,12 @@
               
               <div class = "image">
                 <% if favorite_album.image.url %>
-                  <%= image_tag(favorite_album.image.url) %>
+                  <%= image_tag(favorite_album.image.url, class: "card-img-top") %>
                 <% else %>
                   画像の投稿はありません。
                 <% end %>
               </div>
+              <br>
               
               <div class = "card-text">
                 <%= favorite_album[:content] %>
@@ -72,14 +73,16 @@
             <div class = "card-body">
               <strong class="card-title"><%= link_to my_album[:title], album_path(my_album[:id]) %></strong>
               <br><br>
+              
               <div class = "image">
                 <% if my_album.image.url %>
-                  <%= image_tag(my_album.image.url) %>
+                  <%= image_tag(my_album.image.url, class: "card-img-top") %>
                 <% else %>
                   画像の投稿はありません。
                 <% end %>
               </div>
               <br>
+              
               <div class = "card-text">
                 <%= my_album[:content] %>
               </div>

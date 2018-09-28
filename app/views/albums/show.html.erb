@@ -9,7 +9,7 @@
         <br><br>
         <div class = "image">
           <% if @album.image.url %>
-            <%= image_tag(@album.image.url) %>
+            <%= image_tag(@album.image.url, class: "card-img-top") %>
           <% else %>
             画像がありません。
           <% end %>
@@ -30,7 +30,7 @@
       <br><br>
       <%= link_to 'この投稿を削除する', album_path(@album.id), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger" %>
     <% end %>
-    <div class="text-right"><%= link_to 'みんなの投稿へもどる', albums_path, class: "btn btn-light" %></div>
+    <div class="text-right"><%= link_to 'みんなの投稿へ', albums_path, class: "btn btn-light" %></div>
   </div>
 </div>
 
