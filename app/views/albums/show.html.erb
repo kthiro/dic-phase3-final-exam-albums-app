@@ -1,0 +1,36 @@
+<div class="row justify-content-center">
+  <div class="col-md-6 align-self-center jumbotron">
+    <h2 class="mb-3 font-weight-normal text-center">投稿内容の詳細</h2>
+    <br>
+    <div class = "card">
+      <h4 class = "card-header text-center"></h4>
+      <div class = "card-body">
+        <strong class="card-title"><%= @album[:title] %></strong>
+        <br><br>
+        <div class = "image">
+          <% if @album.image.url %>
+            <%= image_tag(@album.image.url) %>
+          <% else %>
+            画像がありません。
+          <% end %>
+        </div>
+        <br>
+        <div class = "card-text">
+          <%= @album[:content] %>
+        </div>
+      </div>
+      <div class = "card-footer">
+        <em>投稿者 <%= User.find(@album[:user_id]).user_name %></em>
+        <small><p class="text-right">更新日時 <%= @album[:updated_at] %></p></small>
+      </div>
+    </div>
+    <br>
+    <% if current_user.id == @album[:user_id] %>
+      <%= link_to 'この投稿を編集する', edit_album_path(@album.id), class: "btn btn-success" %>
+      <br><br>
+      <%= link_to 'この投稿を削除する', album_path(@album.id), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger" %>
+    <% end %>
+    <div class="text-right"><%= link_to 'みんなの投稿へもどる', albums_path, class: "btn btn-light" %></div>
+  </div>
+</div>
+

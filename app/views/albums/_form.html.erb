@@ -1,0 +1,49 @@
+<div class="row justify-content-center">
+  <div class="col-md-6 align-self-center jumbotron">
+    <%= form_with(model: @album, local: true, url: choose_new_album_or_edit_album) do |f| %>
+      
+      <div class="text-center">
+        <% if action_name == 'new' || action_name == 'confirm' %>
+          <h2 class="mb-3 font-weight-normal">写真の新規投稿</h2>
+        <% elsif action_name == "edit" %>
+          <h2 class="mb-3 font-weight-normal">投稿内容を変更する</h2>
+        <% end %>
+      </div>
+      <br>
+  
+      <% if @album.errors.any? %>
+        <div class="text-left alert alert-danger" role="alert">
+          <div><%= @album.errors.count %>件のエラーがあります。</div>
+          <ul>
+            <% @album.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <br>
+      <div class="text-center">
+        <% if @album.image.url %>
+          <%= image_tag(@album.image.url) %>
+          <%= f.hidden_field :image_cache %>
+        <% end %>
+        
+        <p>どの写真を投稿しますか？</p>
+        <%= f.file_field :image %>
+        <br>
+        <br>
+        <br>
+        <%= f.label 'タイトル', for: "inputTitle", class: "sr-only"  %>
+        <%= f.text_field :title, id: "inputTitle", class: "form-control", placeholder: "この写真にタイトルをつけて下さい。" %>
+        <br>
+        <%= f.label '説明', for: "inputContent", class: "sr-only"  %>
+        <%= f.text_area :content, id: "inputContent", class: "form-control", placeholder: "どんな写真か教えてください。" %>
+        <br>
+
+
+        <%= f.hidden_field :photographer, value: current_user[:user_name] %>
+        <%= f.submit '投稿する', class: "btn btn-primary" %>
+
+    <% end %>
+  </div>
+</div>

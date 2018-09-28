@@ -1,0 +1,47 @@
+<div class="row justify-content-center">
+  <div class="col-md-6 align-self-center jumbotron">
+    <h2 class="mb-3 font-weight-normal">以下の内容で投稿しますか？</h2>
+    <br>
+    <%= form_with(model: @album, local: true) do |f| %>
+      <%= f.hidden_field :title %>
+      <%= f.hidden_field :content %>
+      <%= f.hidden_field :photographer %>
+      
+      <div class = "card">
+        <h4 class = "card-header text-center"></h4>
+        <div class = "card-body">
+          <strong class="card-title"><%= @album[:title] %></strong>
+          <br><br>
+          <div class = "image">
+            <% if @album.image.url %>
+              <%= image_tag(@album.image.url) %>
+              <%= f.hidden_field :image_cache %>
+            <% else %>
+              投稿する画像がありません。
+            <% end %>
+          </div>
+          <br>
+          <div class = "card-text">
+            <%= @album[:content] %>
+          </div>
+        </div>
+        <div class = "card-footer">
+          <em>投稿者 <%= @album[:photographer] %></em>
+        </div>
+      </div>
+      <br>
+      <%= f.submit 'この内容で投稿する', class: "btn btn-primary" %>
+    <% end %>
+    <br>
+    <%= form_with(model: @album, local: true, url: new_album_path, method: 'get') do |f| %>
+
+      <%= f.hidden_field :image_cache if @album.image.url %>
+  
+      <%= f.hidden_field :title %>
+      <%= f.hidden_field :content %>
+      <%= f.hidden_field :photographer %>
+      <%= f.submit '戻る', name: 'back', class: "btn btn-light" %>
+
+    <% end %>
+  </div>
+</div>

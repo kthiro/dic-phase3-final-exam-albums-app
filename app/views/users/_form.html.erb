@@ -1,0 +1,48 @@
+<div class="row justify-content-center">
+  <div class="col-md-6 align-self-center jumbotron">
+    <%= form_with(model: @user, local: true, url: choose_new_user_or_edit_user) do |f| %>
+    
+      <div class="text-center">
+        <% if action_name == 'new' || action_name == 'confirm' %>
+          <h2 class="mb-3 font-weight-normal">みんアルに参加しよう！</h2>
+        <% elsif action_name == "edit" %>
+          <h2 class="mb-3 font-weight-normal">ユーザープロフィールを変更する</h2>
+        <% end %>
+      </div>
+      <br>
+      
+      <div class="text-danger" role="alert">
+        <% flash.each do |key, value| %>
+          <%= content_tag :div, value, class: key %>
+        <% end %>
+      </div>
+      
+      <% if @user.errors.any? %>
+        <div class="text-left alert alert-danger" role="alert">
+          <div><%= @user.errors.count %>件のエラーがあります。</div>
+          <ul>
+            <% @user.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <br>
+      
+      <div class="text-center">
+        <%= f.label 'ユーザーネーム', for: "inputUserName", class: "sr-only"  %>
+        <%= f.text_field :user_name, id: "inputUserName", class: "form-control", placeholder: "ユーザーネームを決めて入力して下さい。" %>
+        <br>
+        <%= f.label 'メールアドレス', for: "inputEmail", class: "sr-only" %>
+        <%= f.text_field :email, id: "inputEmail", class: "form-control", placeholder: "あなたのメールアドレスを入力して下さい。" %>
+        <br>
+        <%= f.label 'パスワード', for: "inputPassword", class: "sr-only" %>
+        <%= f.password_field :password, id: "inputPassword", class: "form-control", placeholder: "パスワードを決めて入力して下さい。" %>
+        <%= f.label 'パスワードの確認', for: "inputPasswordConfirmation", class: "sr-only" %>
+        <%= f.password_field :password_confirmation, id: "inputPasswordConfirmation", class: "form-control", placeholder: "確認のためにもう１度パスワードを入力して下さい。" %>
+        <br>
+        <%= f.submit '登録する', class: "btn btn-lg btn-primary btn-block" %>
+      </div>
+    <% end %>
+  </div>
+</div>

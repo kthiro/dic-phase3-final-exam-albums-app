@@ -1,0 +1,33 @@
+
+<div class="card bg-light text-white">
+  <%= image_tag "background.jpg", class: "img-fluid card-img", alt: "Responsive image" %>
+
+  <div class="card-img-overlay text-center">
+    <h3 class="card-title">みんなのアルバムへようこそ</h3>
+    <br>
+    <h5 class="card-text">みんなのアルバムでは
+      あなたのとっておきの１枚をみんなと共有したり、
+      <br>誰かのとっておきの１枚をつなげて
+      あなただけのお気に入りコレクションを作成できます。
+    </h5>
+    <br><br>
+    <% if logged_in? %>
+      <p class="card-text">
+        <%= link_to '新しい写真を投稿する', new_album_path, class: 'btn btn-light lg link_to' %>
+      </p>
+      <p class="card-text">
+        <%= link_to 'みんなの投稿をみる', albums_path, class: 'btn btn-light lg link_to' %>
+      </p>
+      <p class="card-text">
+        <%= link_to 'お気に入りや自分の投稿を確認する', user_path(current_user.id), class: 'btn btn-light lg link_to' %>
+      </p>
+    <% else %>
+      <p class="card-text">初めての方はこちら
+        <br><%= link_to 'アカウントを作成して利用する', new_user_path, class: 'btn btn-light lg link_to' %>
+      </p>
+      <p class="card-text">アカウントをお持ちの方はこちら
+        <br><%= link_to 'ログインする', new_session_path, class: 'btn btn-primary lg link_to' %>
+      </p>
+    <% end %>
+  </div>
+</div>

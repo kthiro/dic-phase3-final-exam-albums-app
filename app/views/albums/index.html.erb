@@ -1,0 +1,42 @@
+<%= content_tag :h4, notice, class: "alert alert-warning", role: "alert" if notice %>
+
+<section class="jumbotron text-center">
+  <div class="container-fluid">
+    <h1 class="jumbotron-heading">みんなの投稿</h1>
+      <p class="lead text-muted">このページはみんなのためのアルバムです。
+        <br>みんなが投稿したすべての写真を見ることができます。
+        <br>あなたをワクワクさせる写真に出会ったら「お気に入り」してみましょう。
+      </p>
+  </div>
+</section>
+
+<div class="album py-5 bg-light">
+  <div class="container-fluid">
+    <div class="row">
+      <% @albums.each do |album| %>
+        <div class="col-sm-6 col-md-4 col-lg-3">
+          <div class="card sm-6 mb-4 lg-3 shadow-sm">
+            <%= image_tag(album.image.url, class: "card-img-top") %>
+            <div class="card-body">
+              <!--<p class="card-text"><%= album.content %></p>-->
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <%= link_to '詳細', album_path(album.id), class: "btn btn-sm btn-outline-secondary" %>
+                  <% if logged_in? %>
+                    <% favorite = @favorites.find_by(album_id: album.id) %>
+                    <% if favorite %>
+                      <%= link_to 'お気に入り解除', favorite_path(favorite.id), method: :delete, class: "btn btn-sm btn-dark" %>
+                    <% else %>
+                      <%= link_to 'お気に入り登録', favorites_path(album_id: album.id), method: :post, class: "btn btn-sm btn-primary" %>
+                    <% end %>
+                  <% end %>
+                </div>
+                <em class="text-muted"><%= User.find(album.user_id).user_name %></em>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

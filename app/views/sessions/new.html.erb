@@ -1,0 +1,22 @@
+<div class="row justify-content-center">
+  <div class="text-center col-md-6 align-self-center jumbotron">
+    <%= form_with(scope: :session, local: true, url: sessions_path, class: "form-signin") do |f| %>
+
+      <h2 class="mb-3 font-weight-normal">みんアルにログイン</h2>
+  
+      <div class="text-danger" role="alert">
+        <% flash.each do |key, value| %>
+          <%= content_tag :div, value, class: key %>
+        <% end %>
+      </div>
+
+      <%= f.label 'メールアドレス', for: "inputEmail", class: "sr-only" %>
+      <%= f.text_field :email, id: "inputEmail", class: "form-control", placeholder: "メールアドレス" %>
+      <%= f.label 'パスワード', for: "inputPassword", class: "sr-only" %>
+      <%= f.password_field :password, id: "inputPassword", class: "form-control", placeholder: "パスワード" %>
+      <br>
+      <%= f.submit 'ログイン', class: "btn btn-lg btn-primary btn-block" %>
+
+    <% end %>
+  </div>
+</div>
