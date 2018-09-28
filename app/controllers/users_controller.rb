@@ -28,8 +28,12 @@ class UsersController < ApplicationController
     
 
   def show
-    @favorite_albums = current_user.favorite_albums
-    @my_albums = Album.where(user_id: current_user.id)
+    if current_user.id == @user.id
+      @favorite_albums = current_user.favorite_albums
+      @my_albums = Album.where(user_id: current_user.id)
+    else
+      redirect_to user_path(current_user.id)
+    end
   end
 
   def edit
