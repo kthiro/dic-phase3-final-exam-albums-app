@@ -32,21 +32,8 @@ class UsersController < ApplicationController
       @favorite_albums = current_user.favorite_albums
       @my_albums = Album.where(user_id: current_user.id)
     else
-      redirect_to user_path(current_user.id)
+      redirect_to user_path(current_user.id), notice: '指定されたページへはアクセスできません。'
     end
-  end
-
-  def edit
-  end
-  
-  def update
-    @user.update(user_params)
-    redirect_to user_path(@user.id), notice: 'ユーザー情報を更新しました！'
-  end
-  
-  def destroy
-    @user.destroy
-    redirect_to new_user_path, notice: 'ユーザー情報を削除しました！'
   end
   
   private

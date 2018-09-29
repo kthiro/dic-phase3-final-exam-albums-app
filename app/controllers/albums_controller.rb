@@ -34,6 +34,9 @@ class AlbumsController < ApplicationController
   end
 
   def edit
+    unless current_user.id == @album.user_id
+      redirect_to user_path(current_user.id), notice: '指定されたページへはアクセスできません。'
+    end
   end
 
   def update
