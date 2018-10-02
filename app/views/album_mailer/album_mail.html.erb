@@ -1,6 +1,6 @@
 <h1>新しい写真の投稿が完了しました</h1>
 
-<h4>投稿者：<%= User.find(@album.user_id).user_name %></h4>
+<h4>投稿者：<%= @album.user.user_name %></h4>
 <h4>投稿日時：<%= @album.created_at %></h4>
 <h4><%= link_to '投稿内容の確認', album_url(@album.id) %></h4>
 <h5>※投稿内容の確認にはログインが必要です。</h5>
